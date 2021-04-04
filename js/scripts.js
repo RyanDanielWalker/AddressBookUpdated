@@ -28,10 +28,7 @@ AddressBook.prototype.deleteContact = function(id) {
   delete this.contacts[id]
   return true
 }
-AddressBook.prototype.getExcited = function() {
-  this.excitementLevel += "!"
-  return this.excitementLevel
-}
+
 // Business Logic for Contacts ---------
 function Contact(firstName, lastName, phoneNumber) {
   this.firstName = firstName;
