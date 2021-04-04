@@ -2,12 +2,10 @@
 function AddressBook() {
   this.contacts = {};
   this.currentId= 0
-  this.excitementLevel = "!"
 }
 
 AddressBook.prototype.addContact = function(contact) {
   contact.id = this.assignId();
-  contact.excitementLevel = this.getExcited()
   this.contacts[contact.id] = contact;
 }
 
@@ -39,3 +37,50 @@ function Contact(firstName, lastName, phoneNumber) {
 Contact.prototype.fullName = function() {
   return this.firstName + " " + this.lastName;
 }
+
+// Business Logic for PlacesIHaveBeen
+function PlacesIHaveBeen() {
+  this.destinations = {}
+  this.currentId = 0
+}
+PlacesIHaveBeen.prototype.assignId = function() {
+  this.currentId += 1
+  return this.currentId
+}
+PlacesIHaveBeen.prototype.addDestination = function(destination) {
+  destination.id = this.assignId()
+  this.destinations[destination.id] = destination
+}
+PlacesIHaveBeen.prototype.findDestination = function(id) {
+  if (this.destinations[id] != undefined) {
+    return destinations[id]
+  }
+  return false
+}
+PlacesIHaveBeen.prototype.deleteDestination = function(id) {
+  if (this.destinations[id] === undefined) {
+    return false
+  }
+  delete this.destinations[id]
+  return true
+}
+// Business Logic for Destination
+function Destination(location, landmarks, timeOfYear, notes) {
+  this.location = location;
+  this.landmarks = landmarks;
+  this.timeOfYear = timeOfYear;
+  this.notes = notes;
+}
+Destination.prototype.showLocation = function() {
+  return this.location
+}
+
+$(document).ready(function(){
+  $("#id").click(event)
+  event.preventDefault
+  
+})
+
+
+
+
