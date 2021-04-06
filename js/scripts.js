@@ -53,8 +53,14 @@ function AddressOption(workAddress, homeAddress, emailAddress) {
   this.workAddress = workAddress;
   this.homeAddress = homeAddress;
   this.emailAddress = emailAddress;
-
 }
+
+// AddressOption.values(function (value) {
+//   if (this.value === undefined) {
+//     AddressOption.remove(this.key)
+//   }
+// })
+
 
 // Business Logic for PlacesIHaveBeen
 function PlacesIHaveBeen() {
@@ -107,6 +113,8 @@ function displayContactDetails(addressBookToDisplay) {
 }
 function showContact(contactId) {
   const contact = addressBook.findContact(contactId)
+
+  // $("#work-address").show()
   $("#show-contact").show()
   $(".first-name").html(contact.firstName)
   $(".last-name").html(contact.lastName)
@@ -148,6 +156,18 @@ $(document).ready(function () {
     $("input#new-email-address").val("");
     let newContact = new Contact(inputtedFirstName, inputtedLastName, inputtedPhoneNumber);
     let newAddress = new AddressOption(inputtedWorkAddress, inputtedHomeAddress, inputtedEmailAddress)
+
+    if (inputtedWorkAddress === "") {
+      $("#work-address").hide();
+    }
+    if (inputtedHomeAddress === "") {
+      console.log("this is home");
+    }
+    if (inputtedEmailAddress === "") {
+      console.log("this is email");
+    }
+
+    console.log(newAddress);
     addressBook.addContact(newContact);
     newContact.addAddressOption(newAddress);
     displayContactDetails(addressBook);
