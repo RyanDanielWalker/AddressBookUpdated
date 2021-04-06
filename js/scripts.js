@@ -43,23 +43,22 @@ Contact.prototype.fullName = function () {
 Contact.prototype.addAddressOption = function (addressOption) {
   this.addressOptions = addressOption
 }
-
-
-
-
-
-
+// Business Logic for AddressOption-----------------
 function AddressOption(workAddress, homeAddress, emailAddress) {
   this.workAddress = workAddress;
   this.homeAddress = homeAddress;
   this.emailAddress = emailAddress;
 }
 
-// AddressOption.values(function (value) {
-//   if (this.value === undefined) {
-//     AddressOption.remove(this.key)
-//   }
-// })
+
+
+
+
+
+
+
+
+
 
 
 // Business Logic for PlacesIHaveBeen
@@ -113,20 +112,35 @@ function displayContactDetails(addressBookToDisplay) {
 }
 function showContact(contactId) {
   const contact = addressBook.findContact(contactId)
-
-  // $("#work-address").show()
   $("#show-contact").show()
   $(".first-name").html(contact.firstName)
   $(".last-name").html(contact.lastName)
   $(".phone-number").html(contact.phoneNumber)
-  $(".work-address").html(contact.addressOptions.workAddress)
-  $(".home-address").html(contact.addressOptions.homeAddress)
-  $(".email-address").html(contact.addressOptions.emailAddress)
-
+  if (contact.addressOptions.workAddress === "") {
+    $("#work-address").hide()
+  } else {
+    $("#work-address").show()
+    $(".work-address").html(contact.addressOptions.workAddress)
+  }
+  if (contact.addressOptions.homeAddress === "") {
+    $("#home-address").hide()
+  } else {
+    $("#home-address").show()
+    $(".home-address").html(contact.addressOptions.homeAddress)
+  }
+  if (contact.addressOptions.emailAddress === "") {
+    $("#email-address").hide()
+  } else {
+    $("#email-address").show()
+    $(".email-address").html(contact.addressOptions.emailAddress)
+  }
   let buttons = $("#buttons")
   buttons.empty()
   buttons.append("<button class='deleteButton' id=" + + contact.id + ">Delete</button>")
 }
+
+
+
 function attachContactListeners() {
   $("ul#contacts").on("click", "li", function () {
     showContact(this.id)
@@ -156,20 +170,10 @@ $(document).ready(function () {
     $("input#new-email-address").val("");
     let newContact = new Contact(inputtedFirstName, inputtedLastName, inputtedPhoneNumber);
     let newAddress = new AddressOption(inputtedWorkAddress, inputtedHomeAddress, inputtedEmailAddress)
-
-    if (inputtedWorkAddress === "") {
-      $("#work-address").hide();
-    }
-    if (inputtedHomeAddress === "") {
-      console.log("this is home");
-    }
-    if (inputtedEmailAddress === "") {
-      console.log("this is email");
-    }
-
-    console.log(newAddress);
     addressBook.addContact(newContact);
     newContact.addAddressOption(newAddress);
     displayContactDetails(addressBook);
+
+
   });
 });
